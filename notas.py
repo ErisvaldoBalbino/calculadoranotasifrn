@@ -9,16 +9,16 @@ def calcular_nota2_para_aprovacao(nota1):
 def calcular_media_final_opcao1(nota1, nota2, notafinal):
     return (calcular_media(nota1, nota2) + notafinal) / 2
 
-def calcular_media_final_opcao2(nota1, nota2, notafinal):
+def calcular_media_final_opcao2(nota2, notafinal):
     return (2 * notafinal + 3 * nota2) / 5
 
-def calcular_media_final_opcao3(nota1, nota2, notafinal):
+def calcular_media_final_opcao3(nota1, notafinal):
     return (2 * nota1 + 3 * notafinal) / 5
 
 def escolher_melhor_formula(nota1, nota2, notafinal):
     opcao1 = calcular_media_final_opcao1(nota1, nota2, notafinal)
-    opcao2 = calcular_media_final_opcao2(nota1, nota2, notafinal)
-    opcao3 = calcular_media_final_opcao3(nota1, nota2, notafinal)
+    opcao2 = calcular_media_final_opcao2(nota2, notafinal)
+    opcao3 = calcular_media_final_opcao3(nota1, notafinal)
 
     melhores_resultados = {'1': opcao1, '2': opcao2, '3': opcao3}
     melhor_opcao = max(melhores_resultados, key=melhores_resultados.get)
@@ -26,12 +26,12 @@ def escolher_melhor_formula(nota1, nota2, notafinal):
     return melhor_opcao, melhores_resultados[melhor_opcao]
 
 st.title('Calculadora de Notas IFRN')
-st.write('Uma calculadora simples para saber se você será aprovado em alguma disciplina do IFRN. Digite suas notas nos campos abaixo e clique em "Calcular média" para ver os resultados.')
+st.write('Calculadora simples para saber sua média em alguma disciplina do IFRN. Digite suas notas nos campos abaixo e clique em "Calcular média" para ver os resultados.')
 st.text('(Se aparecer uma dízima periódica, arredonde para cima)')
 
 nota1 = st.number_input('Nota 1', 0, 100, 1)
 nota2 = st.number_input('Nota 2', 0, 100, 1)
-notafinal = st.number_input('Nota Final', 0, 100, 1)
+notafinal = st.number_input('Nota da prova final', 0, 100, 0)
 
 media = calcular_media(nota1, nota2)
 nota2_aprovacao = calcular_nota2_para_aprovacao(nota1)
@@ -48,7 +48,7 @@ if st.button('Calcular média final'):
     if media_final >= 60:
         st.success(f'Sua média final usando a fórmula **{melhor_opcao}** é: **{media_final:.2f}**. Parabéns, você foi aprovado! :pray:')
     else:
-        st.error(f'Sua média final usando a fórmula **{melhor_opcao}** seria: {media_final:.2f}.')
+        st.error(f'Sua média final usando a fórmula **{melhor_opcao}** é: {media_final:.2f}.')
 
 st.markdown('---')
 st.header('Sobre')
