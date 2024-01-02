@@ -38,17 +38,19 @@ nota2_aprovacao = calcular_nota2_para_aprovacao(nota1)
 
 if st.button('Calcular média'):
     if media >= 60:
-        st.success(f'Sua média é **{media:.0f}**. Parabéns, você foi aprovado! :sunglasses:')
+        st.success(f'Sua média é: **{media:.0f}**. Parabéns, você foi aprovado! :sunglasses:')
     else:
         st.error(f'Sua média atual é **{media:.0f}**. :white_frowning_face:')
-        st.warning(f'Para ser aprovado, você precisaria tirar **{nota2_aprovacao:.2f}** na segunda nota ou fazer a **prova final**.')
-
+        # Display the warning when nota2 is 0 or greater and nota1 is greater than 0
+        if nota2 >= 0 and nota1 > 0:
+            st.warning(f'Para ser aprovado, você precisaria tirar **{nota2_aprovacao:.2f}** na segunda nota ou fazer a **prova final**.')
+            
 if st.button('Calcular média final'):
     melhor_opcao, media_final = escolher_melhor_formula(nota1, nota2, notafinal)
     if media_final >= 60:
         st.success(f'Sua média final usando a fórmula **{melhor_opcao}** é: **{media_final:.2f}**. Parabéns, você foi aprovado! :pray:')
     else:
-        st.error(f'Sua média final usando a fórmula **{melhor_opcao}** é: {media_final:.2f}.')
+        st.error(f'Sua média final usando a fórmula **{melhor_opcao}** é: **{media_final:.2f}**.')
 
 st.markdown('---')
 st.header('Sobre')
